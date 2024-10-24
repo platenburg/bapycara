@@ -21,7 +21,7 @@
     <div class="container bg-bg pt-2 text-white">
         <div class="row">
             <h1 class="title-big">Zoos & parks</h1>
-            <h2 class="title-small">Places to find a capybara</h2>
+            <h2 class="title-small">Where do I find a capybara?</h2>
         </div>
         <ul id="navbar">
             <li><a href="/" class="link-light">Home</a></li>
@@ -35,9 +35,24 @@
             <!-- Filled by JS -->
         </ul>
 
-        <!-- Countries - alphabetically sorted -->
-        <div id="zoos" class="row row-cols-3">
-            <!-- Filled by JS -->
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <!-- Countries - alphabetically sorted -->
+                <div id="zoos" class="row row-cols-1 row-cols-md-2">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card bg-transparent text-white mt-5">
+                    <div class="card-body">
+                        <h5 class="card-title">Found a missing zoo?</h5>
+                        <p class="card-text">I do my best, but sometimes I miss something. If you miss any zoos or parks
+                            on this page, do let me know!</p>
+                        <a href="mailto:bapycara@platenburg.dev" class="btn btn-outline-light">Report a missing zoo</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -56,7 +71,7 @@
                 data.forEach(country => {
                     const countryDiv = document.createElement('div');
                     countryDiv.id = country.code;
-                    countryDiv.classList.add('col', 'pt-5');
+                    countryDiv.classList.add('pt-5');
                     const countryHeader = document.createElement('h4');
                     countryHeader.innerHTML =
                         `<img src="https://flagsapi.com/${country.code.toUpperCase()}/flat/32.png">&nbsp;${country.name}`;
@@ -76,13 +91,16 @@
                         zooLink.classList.add('link-light');
                         zooListItem.appendChild(zooLink);
                         countryList.appendChild(zooListItem);
+
+                        // Append zoo name to meta keywords tag
+                        document.head.querySelector('meta[name="keywords"]').content += `, ${zoo.name}`;
                     });
 
                     const countryListItem = document.createElement('li');
                     countryListItem.classList.add('country-list-item');
                     const countryLink = document.createElement('a');;
                     countryLink.href = `#${country.code}`;
-                    countryLink.innerText = country.name;
+                    countryLink.innerHTML = `<img src="https://flagsapi.com/${country.code.toUpperCase()}/flat/16.png">&nbsp;${country.name}`;
                     countryLink.classList.add('link-light');
                     countryListItem.appendChild(countryLink);
                     countries.appendChild(countryListItem);
